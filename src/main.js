@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const { getDateTime, getTime, getDate} = require('./modules/time/getTime.js');
 const { loadCommands } = require('./handler/loadCommands/loadCommands.js')
 const {getStatusMessage} = require('./modules/getMessage/getStatusMessage.js')
+const groupService = require('./groupService.js')
 
 const { client } = require('./discord/bot.js')
 
