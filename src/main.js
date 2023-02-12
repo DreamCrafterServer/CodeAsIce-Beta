@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 
 const { getDateTime, getTime, getDate} = require('./modules/time/getTime.js');
 const { loadCommands } = require('./handler/loadCommands/loadCommands.js')
+const {getStatusMessage} = require('./modules/getMessage/getStatusMessage.js')
 
 const { client } = require('./discord/bot.js')
 
@@ -11,7 +12,8 @@ dotenv.config()
 client.once(Events.ClientReady,async () => {
     console.log(`[INFO] Ready! Logged in as ${client.user.tag}`)
     await loadCommands();
-    console.log(`[INFO] all service loaded and online.`)
+	await getStatusMessage();
+    console.log(`[INFO] service loaded and online.`);
     console.log(`done!`)
 })
 
@@ -42,6 +44,6 @@ client.once('messageCreate',async (msg) => {
 */
     //const guild = await client.guilds.cache.get(guild.name)
     //console.log(guild)
-    //msg.channel.send({embeds: [exampleEmbed3]})    
+    //msg.channel.send({embeds: [commandResponse2,commandResponse]})    
 })
 

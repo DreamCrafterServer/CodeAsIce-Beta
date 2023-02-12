@@ -17,7 +17,7 @@ const bot = new Client({
     ]
 });
 
-//initialize();
+initialize();
 
 bot.login(process.env.TOKEN)
 

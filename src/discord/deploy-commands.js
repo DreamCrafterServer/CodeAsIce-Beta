@@ -32,7 +32,7 @@ async function initialize(){
 
             // The put method is used to fully refresh all commands in the guild with the current set
             const data = await rest.put(
-                Routes.applicationGuildCommands(process.env.client, process.env.guild),
+                Routes.applicationCommands(process.env.client),
                 { body: commands },
             );
 
