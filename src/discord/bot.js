@@ -19,8 +19,8 @@ const bot = new Client({
 
 //initialize();
 
-//bot.login(process.env.TOKEN)
-bot.login('OTU3MjEwNzM4NTY3NTQ4OTU5.G19wfn.CG0KJ3xvs7uIW6gRQ13qOq28a6ZbkoVrms0jBE')
+bot.login(process.env.TOKEN)
+
 
 module.exports = {
     client: bot
