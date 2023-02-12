@@ -30,7 +30,7 @@ module.exports = {
 			}, 300000);   			
 		} else {
 			await interaction.reply({embeds: [pingResponse(getDateTime())], ephemeral: true});
-			console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName} (ephemeral)'`)	
+			console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}' (ephemeral)`)	
 		}
 
 		//console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}'`)		

@@ -10,9 +10,10 @@ dotenv.config()
 
 client.once(Events.ClientReady,async () => {
     console.log(`[INFO] Ready! Logged in as ${client.user.tag}`)
-    loadCommands();
+    await loadCommands();
+    console.log(`[INFO] all service loaded and online.`)
+    console.log(`done!`)
 })
-
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -28,7 +29,19 @@ client.on(Events.InteractionCreate, async interaction => {
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({ content: '哎呀，處理這個指令的時候出錯了，請你聯絡開發者。', ephemeral: true });
 	}
 });
+
+client.once('messageCreate',async (msg) => {
+/*
+    client.guilds.cache.forEach( (guild) => {
+        console.log(guild)
+        console.log(`${guild.name} | ${guild.memberCount} | ${guild.id}`)
+        })
+*/
+    //const guild = await client.guilds.cache.get(guild.name)
+    //console.log(guild)
+    //msg.channel.send({embeds: [exampleEmbed3]})    
+})
 

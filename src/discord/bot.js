@@ -7,7 +7,7 @@ const { initialize } = require('./deploy-commands.js')
 
 require('dotenv').config();
 
-const client = new Client({
+const bot = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
@@ -17,16 +17,11 @@ const client = new Client({
     ]
 });
 
-initialize();
+//initialize();
 
-client.login(process.env.TOKEN)
-//client.login('OTU3MjEwNzM4NTY3NTQ4OTU5.GVBh8-.r4UjDSEjYEtJhFAHlcMHVcstvwLlCLZWW01zHY')
-/*
-client.once(Events.ClientReady,async () => {
-    console.log(`Ready! Logged in as ${client.user.tag}`)
+//bot.login(process.env.TOKEN)
+bot.login('OTU3MjEwNzM4NTY3NTQ4OTU5.G19wfn.CG0KJ3xvs7uIW6gRQ13qOq28a6ZbkoVrms0jBE')
 
-})
-*/
 module.exports = {
-    client: client
+    client: bot
 }
