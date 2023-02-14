@@ -1,6 +1,6 @@
 const { Client, Events, GatewayIntentBits, EmbedBuilder, Embed, REST, Collection } = require('discord.js');
 const dotenv = require('dotenv');
-const { initialize } = require('./deploy-commands.js')
+const { registerGlobalCommands, registerGroupCommands } = require('./deploy-commands.js')
 
 //const dotenv = require('../../src')
 //dotenv.config({path:'../'})
@@ -17,9 +17,15 @@ const bot = new Client({
     ]
 });
 
-initialize();
+async function startUpProcess(){
+    const status_global = await registerGlobalCommands();
+    const status_group = await registerGroupCommands();
+    bot.login(process.env.TOKEN);
+}
 
-bot.login(process.env.TOKEN)
+startUpProcess();
+
+//bot.login(process.env.TOKEN)
 
 
 module.exports = {

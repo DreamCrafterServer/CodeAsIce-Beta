@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 
-const { getDateTime } = require('../../modules/time/getTime.js')
+const { getDateTime } = require('../../../modules/time/getTime.js')
 
 function pingResponse(time){
 	return new EmbedBuilder()

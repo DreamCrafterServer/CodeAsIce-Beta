@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
-const { getDateTime } = require('../../modules/time/getTime.js')
+const { getDateTime } = require('../../../modules/time/getTime.js')
+const { info } = require('../../../modules/consoleMsg/console.js')
 
 let commandCooldown = []
 
@@ -45,8 +46,8 @@ module.exports = {
 			await interaction.reply({embeds: [commandResponse2,commandResponse]});
 
             //console.log(channelName)
-			console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}'`);
-			console.log(`[INFO] ${interaction.commandName} triggered, pushed channel ${interaction.channelId}(#${interaction.channel.name}) into cooldown list`);
+			info(`${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}`);
+			info(`${interaction.commandName} triggered, pushed channel ${interaction.channelId}(#${interaction.channel.name}) into cooldown list`);
 			
             commandCooldown.push(interaction.channelId); 
             commandCooldown.push(interaction.channel.name);  
@@ -55,14 +56,14 @@ module.exports = {
 			setTimeout(function () {
 				
                 //pingCooldown = false;
-				console.log(`[INFO] command ${interaction.commandName} ended, dropped channel ${commandCooldown[0]}(#${commandCooldown[1]})`);
+				info(`command ${interaction.commandName} ended, dropped channel ${commandCooldown[0]}(#${commandCooldown[1]})`);
                 commandCooldown.shift()
                 commandCooldown.shift()
 
 			}, 300000);   			
 		} else {
 			await interaction.reply({embeds: [commandResponse2,commandResponse], ephemeral: true});
-			console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}' (ephemeral)`)	
+			info(`${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}' (ephemeral)`)	
 		}
 
 

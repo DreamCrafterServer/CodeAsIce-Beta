@@ -3,18 +3,22 @@ const dotenv = require('dotenv');
 
 const { getDateTime, getTime, getDate} = require('./modules/time/getTime.js');
 const { loadCommands } = require('./handler/loadCommands/loadCommands.js')
-const {getStatusMessage} = require('./modules/getMessage/getStatusMessage.js')
-const groupService = require('./groupService.js')
+const {getStatusMessage} = require('./modules/ServerStatusUpdater/getStatusMessage.js')
+const {info, warn} = require('./modules/consoleMsg/console.js')
+//const groupService = require('./groupService.js')
 
 const { client } = require('./discord/bot.js')
 
-dotenv.config()
+//const {abc} = require('./config.json')
+//dotenv.config({path:'./.env'})
+require('dotenv').config({path:__dirname+'/.env'})
+
 
 client.once(Events.ClientReady,async () => {
-    console.log(`[INFO] Ready! Logged in as ${client.user.tag}`)
+    info(`Ready! Logged in as ${client.user.tag}`)
     await loadCommands();
 	await getStatusMessage();
-    console.log(`[INFO] service loaded and online.`);
+    info(`service loaded and online.`);
     console.log(`done!`)
 })
 
@@ -24,7 +28,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
+		warn(`No command matching ${interaction.commandName} was found.`);
 		return;
 	}
 
