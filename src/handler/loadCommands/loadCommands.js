@@ -4,7 +4,7 @@ const fg = require('fast-glob')
 const { Client, Collection, Events, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
 
 const { client } = require('../../discord/bot.js')
-const { info, warn } = require('../../modules/consoleMsg/console.js')
+const { info, warn, done } = require('../../modules/consoleMsg/console.js')
 
 //const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -21,20 +21,25 @@ async function loadGlobalCommands(){
 	info(`---- Global Commands Loading ----`)
 
 	for( i=0 ; i<commandFiles.length ; i++){
-		const cmd = await require(`../../commands/globalCommands/${commandFiles[i]}/index.js`)
+		const fileListsPath = path.join(__dirname, `../../commands/globalCommands/${commandFiles[i]}`)
+		const fileLists = fs.readdirSync(fileListsPath)
+		//console.log(fileLists)
 
-		info(`command '${cmd.data.name}' loaded!`)
+		if(fileLists.includes('index.js')){
+			const cmd = await require(`../../commands/globalCommands/${commandFiles[i]}/index.js`)
 
-    	if ('data' in cmd && 'execute' in cmd) {
-		    client.commands.set(cmd.data.name, cmd);
-	    } else {
-    		warn(`The command at ${files} is missing a required "data" or "execute" property.`);
-    	}		
+			info(`command '${cmd.data.name}' loaded!`)
 	
+			if ('data' in cmd && 'execute' in cmd) {
+				client.commands.set(cmd.data.name, cmd);
+			} else {
+				warn(`The command at ${files} is missing a required "data" or "execute" property.`);
+			}		
+		}
 	}
 
 	info(`---- ---- ---- ---- ---- ---- ----`)		
-	info(`all global commands loaded`)
+	done(`all global commands loaded`)
 	/*
     const commandsPath = path.join(__dirname, '../../commands');
 
@@ -62,20 +67,32 @@ async function loadGroupCommands(){
 
     const commandsPath = path.join(__dirname, '../../commands/groupCommands');
     const commandFiles = fs.readdirSync(commandsPath)
+	//const filelists = fs.readdirSync(commandsPath)
+	//console.log(filelists)
+
+	//const fileLists = fs.readdirSync(__dirname, `../../commands/groupCommands/ping`)
+	//console.log(fileLists)
 
 	info(`---- Group Commands Loading ----`)
 
 	for( i=0 ; i<commandFiles.length ; i++){
-		const cmd = await require(`../../commands/groupCommands/${commandFiles[i]}/index.js`)
+		//console.log(commandFiles[i])
+		const fileListsPath = path.join(__dirname, `../../commands/groupCommands/${commandFiles[i]}`)
+		const fileLists = fs.readdirSync(fileListsPath)
+		//console.log(fileLists)
 
-		info(`command '${cmd.data.name}' loaded!`)
+		if(fileLists.includes('index.js')){
+			const cmd = await require(`../../commands/groupCommands/${commandFiles[i]}/index.js`)
 
-    	if ('data' in cmd && 'execute' in cmd) {
-		    client.commands.set(cmd.data.name, cmd);
-	    } else {
-    		warn(`The command at ${files} is missing a required "data" or "execute" property.`);
-    	}		
+			info(`command '${cmd.data.name}' loaded!`)
 	
+			if ('data' in cmd && 'execute' in cmd) {
+				client.commands.set(cmd.data.name, cmd);
+			} else {
+				warn(`The command at ${files} is missing a required "data" or "execute" property.`);
+			}
+		}
+		
 	}
 
 	/*
@@ -92,7 +109,7 @@ async function loadGroupCommands(){
 	
 	}*/
 	info(`---- ---- ---- ---- ---- ---- ----`)		
-	info(`all group commands loaded`)
+	done(`all group commands loaded`)
 
 }
 

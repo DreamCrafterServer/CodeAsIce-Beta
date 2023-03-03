@@ -32,7 +32,7 @@ function accurationTime(){
 }
 
 function accurationTimeTimestamp(timestamp){
-    const date = new Date(timestamp );
+    const date = new Date(timestamp);
     let year = date.getFullYear();
     let month = (date.getMonth()+1);
     let day = date.getDate();

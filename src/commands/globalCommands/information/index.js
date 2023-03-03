@@ -7,13 +7,13 @@ const { info } = require('../../../modules/consoleMsg/console.js')
 let commandCooldown = []
 
 //TL;DR anti-spam explaination.
-//I cached the channel which just triggered a slash command and also channel name for console showing
+//I cached the channelId which just triggered a slash command and also channel name for console showing
 //when the cooldown finished, clear first two value in commandCooldown array
 //that's how it works!
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('伺服器資訊')
+		.setName('群組資訊')
 		.setDescription('提供當前群組的相關資訊'),
         
 
@@ -23,7 +23,11 @@ module.exports = {
 		let guildName = interaction.member.guild.name;
 		let guildMemberCount = interaction.member.guild.memberCount;
 		let guildLocale = interaction.guildLocale
-		let afkChannelID = `<#${interaction.member.guild.afkChannelId}>`;
+		if (interaction.member.guild.afkChannelId == null){
+			afkChannelID =  '`未設置`';
+		} else {
+			afkChannelID = `<#${interaction.member.guild.afkChannelId || ''}>`;
+		}
 		let afkTimeout = interaction.member.guild.afkTimeout / 60 + " " + "分鐘";
 		let ownerId = `<@${interaction.member.guild.ownerId}>`
 		let guildemoji = {
@@ -31,6 +35,10 @@ module.exports = {
 			png: interaction.guild.emojis.cache.filter(emoji => emoji.animated).size,
 			gif: interaction.guild.emojis.cache.filter(emoji => !emoji.animated).size
 		}
+		let guildBanner = (interaction.member.guild.bannerURL() || "未設置")
+		console.log(guildBanner)
+		//let guildBanner = (interaction.member.guild.bannerURL() || "沒有設置")
+		
 		let timestamp = interaction.member.joinedTimestamp;
 		function guildJoinDate(timestamp){
 			timeConvert = accurationTimeTimestamp(timestamp)
@@ -52,7 +60,7 @@ module.exports = {
 		//console.log(interaction.guild.emojis.cache.size)
         //console.log(interaction.member.guild.ownerId)
 
-		const randomTitle = ['我.. 盡力了', '通靈大法.. 賀!!', '李白水中撈月，而我.. 群中撈資料。']
+		const randomTitle = ['我.. 盡力了。', '通靈大法.. 賀!!', '李白水中撈月，而我.. 群中撈資料。']
 		const randomChoose = Math.floor(Math.floor(Math.random() * 10)/3);
 		
 		const commandResponse = new EmbedBuilder()
@@ -90,6 +98,7 @@ module.exports = {
 				{ name: '動態表符', value: "`"+`${guildemoji.gif}`+"`", inline: true },
 				{ name: '靜態表符', value: "`"+`${guildemoji.png}`+"`", inline: true}
 			)
+			//.setImage(guildBanner)
 /*
 			.setDescription('以下是我能力內所觀測到的資料\n\n'+'**群組綜觀**\n' +
 							'> **群組名稱**：' +' '+ '`' + guildName + '`\n' + 

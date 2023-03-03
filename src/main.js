@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const { getDateTime, getTime, getDate} = require('./modules/time/getTime.js');
 const { loadCommands } = require('./handler/loadCommands/loadCommands.js')
 const {getStatusMessage} = require('./modules/ServerStatusUpdater/getStatusMessage.js')
-const {info, warn} = require('./modules/consoleMsg/console.js')
+const {info, warn, done} = require('./modules/consoleMsg/console.js')
 //const groupService = require('./groupService.js')
 
 const { client } = require('./discord/bot.js')
@@ -15,11 +15,12 @@ require('dotenv').config({path:__dirname+'/.env'})
 
 
 client.once(Events.ClientReady,async () => {
-    info(`Ready! Logged in as ${client.user.tag}`)
+    done(`Ready! Logged in as ${client.user.tag}`)
     await loadCommands();
 	await getStatusMessage();
-    info(`service loaded and online.`);
-    console.log(`done!`)
+    done(`service loaded and online.`);
+    let { randomNumber, previousNumber } = require('./modules/randomNumberPer5min/index.js');
+    console.log(`done!`);
 })
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -52,3 +53,11 @@ client.once('messageCreate',async (msg) => {
     //msg.channel.send({embeds: [commandResponse2,commandResponse]})    
 })
 
+
+
+/*
+cpu.usage()
+  .then(cpuPercentage => {
+    console.log(cpuPercentage) // 10.38
+  })
+  */

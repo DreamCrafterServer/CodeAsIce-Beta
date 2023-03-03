@@ -20,9 +20,13 @@ async function registerGlobalCommands(){
     const commandFiles = fs.readdirSync(commandsPath)//.filter(file => file.endsWith('.js'));
     
     for( i=0 ; i<commandFiles.length ; i++){
-        const command = await require(`../commands/globalCommands/${commandFiles[i]}/index.js`)
-        //console.log(command.data)
-        commands.push(command.data.toJSON());
+		const fileListsPath = path.join(__dirname, `../commands/globalCommands/${commandFiles[i]}`)
+		const fileLists = fs.readdirSync(fileListsPath)
+        if(fileLists.includes('index.js')){
+            const command = await require(`../commands/globalCommands/${commandFiles[i]}/index.js`)
+            //console.log(command.data)
+            commands.push(command.data.toJSON());
+        }
     }
 
     //console.log(commandFiles)
@@ -76,9 +80,13 @@ async function registerGroupCommands(){
     const commandFiles = fs.readdirSync(commandsPath)//.filter(file => file.endsWith('.js'));
     
     for( i=0 ; i<commandFiles.length ; i++){
-        const command = await require(`../commands/groupCommands/${commandFiles[i]}/index.js`)
-        //console.log(command.data)
-        commands.push(command.data.toJSON());
+		const fileListsPath = path.join(__dirname, `../commands/groupCommands/${commandFiles[i]}`)
+		const fileLists = fs.readdirSync(fileListsPath)
+        if(fileLists.includes('index.js')){
+            const command = await require(`../commands/groupCommands/${commandFiles[i]}/index.js`)
+            //console.log(command.data)
+            commands.push(command.data.toJSON());
+        }
     }    
 
 
