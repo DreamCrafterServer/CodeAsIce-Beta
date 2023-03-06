@@ -76,13 +76,7 @@ module.exports = {
                 { name: '群組地區', value: "`"+`${guildLocale}`+"`", inline: true },
                 { name: '群擁有者', value: `${ownerId}`, inline: true },
 				{ name: '創建時間', value: "`"+`${guildJoinDate(timestamp)}`+"`", inline: true}
-				//{ name: '\u200B', value: '\u200B', inline: true },
-				//{ name: '\u200B', value: ' ', inline: true}
-                //{ name: '基岩連線', value: '沒有支援！', inline: true},
-                //{ name: '⭐ 社群平台', value: '> 我們主要在 Discord 上交流或通知'},
-                //{ name: 'Facebook', value: '[點我前往](https://dcraft.org/facebook)', inline: true },
-                //{ name: 'Instagram', value: '[點我前往](https://dcraft.org/instagram)', inline: true },		
-                //{ name: 'Discord', value: '[點我前往](https://discord.com/invite/as77uKwjyV)', inline: true}
+
             )
 			.addFields(
 				{ name: ' ', value: ' '},
@@ -98,20 +92,6 @@ module.exports = {
 				{ name: '動態表符', value: "`"+`${guildemoji.gif}`+"`", inline: true },
 				{ name: '靜態表符', value: "`"+`${guildemoji.png}`+"`", inline: true}
 			)
-			//.setImage(guildBanner)
-/*
-			.setDescription('以下是我能力內所觀測到的資料\n\n'+'**群組綜觀**\n' +
-							'> **群組名稱**：' +' '+ '`' + guildName + '`\n' + 
-							'> **群組人數**：' +' '+ '`' + guildMemberCount + '`\n'+
-							'> **群組標籤**：' + ' '+ '`' + guildId + '`\n'+
-							'> **群組地區**：' +' '+ '`' + guildLocale + '`\n'+ 
-							'> **群擁有者**：' +' '+ ownerId + `\n\n`+
-							'**掛機判斷相關**\n' +
-							'> **不活躍頻道**：' +' '+  afkChannelID + '\n' +
-							'> **不活躍時限**：' +'`'+  afkTimeout +'`'+ ' 分鐘\n'
-							 )
-*/
-			//.setDescription(`**伺服器名稱**: ${guildName}\n**伺服器人數**: ${guildMemberCount}\n**伺服器ID**: ${guildId}`)
 			.setFooter({ text: `DreamCrafter 築夢物語 技術提供 • ${time}`, iconURL: 'https://images-ext-2.discordapp.net/external/AuUUQgcieuKl4ZeY4I56Ydhvep_1ear5yc1hCktfKsM/%3Fsize%3D2048/https/cdn.discordapp.com/icons/232865546868228106/a_ab18bcc7cb6b85bf5e040d7a7865ea73.gif?width=559&height=559' });
 
 
@@ -138,6 +118,6 @@ module.exports = {
 			info(`${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}' (ephemeral)`)	
 		}
 
-		//console.log(`[INFO] ${interaction.user.username}#${interaction.user.discriminator} issued command '${interaction.commandName}'`)		
+			
 	},
 };

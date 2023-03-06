@@ -4,6 +4,8 @@ const { getDateTime } = require('../time/getTime.js')
 number = Math.floor(Math.random() * 100)
 info(`number initial update, the first number for starting up is ${number}`)
 global.numberUpdateTime = getDateTime()
+global.randomNumber = number
+global.previousNumber = '尚未有上個數字'
 
 async function generateNumber(){
     

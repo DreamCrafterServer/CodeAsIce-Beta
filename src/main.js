@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 const { getDateTime, getTime, getDate} = require('./modules/time/getTime.js');
 const { loadCommands } = require('./handler/loadCommands/loadCommands.js')
-const {getStatusMessage} = require('./modules/ServerStatusUpdater/getStatusMessage.js')
+//const {getStatusMessage} = require('./modules/ServerStatusUpdater/getStatusMessage.js')
 const {info, warn, done} = require('./modules/consoleMsg/console.js')
 //const groupService = require('./groupService.js')
 
@@ -17,7 +17,7 @@ require('dotenv').config({path:__dirname+'/.env'})
 client.once(Events.ClientReady,async () => {
     done(`Ready! Logged in as ${client.user.tag}`)
     await loadCommands();
-	await getStatusMessage();
+	//await getStatusMessage();
     done(`service loaded and online.`);
     let { randomNumber, previousNumber } = require('./modules/randomNumberPer5min/index.js');
     console.log(`done!`);

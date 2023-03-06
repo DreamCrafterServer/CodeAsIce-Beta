@@ -1,9 +1,8 @@
 const { SlashCommandBuilder,EmbedBuilder } = require('discord.js');
-const axios = require('axios').default;
-//const { EmbedBuilder } = require('discord.js');
+
 const { info } = require('../../../modules/consoleMsg/console.js')
 const { getDateTime } = require('../../../modules/time/getTime.js')
-
+const { smallerNumber,  biggerNumber, correctNumber} = require('./embed.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -22,7 +21,8 @@ module.exports = {
         await interaction.deferReply();
 
         const playerGuess = interaction.options.getString('數字')
-        
+        console.log(playerGuess, global.randomNumber, global.numberUpdateTime)
+
         if(global.randomNumber == playerGuess){
             await interaction.editReply({embeds: [await correctNumber(getDateTime(), interaction.user, playerGuess, global.previousNumber)]})
         } else if ( global.randomNumber > playerGuess){
@@ -31,7 +31,5 @@ module.exports = {
             await interaction.editReply({embeds: [await biggerNumber(getDateTime(), interaction.user, playerGuess, global.previousNumber)]})
         }
 
-        //console.log(res)
-        //console.log(interaction.user)
     }
 }

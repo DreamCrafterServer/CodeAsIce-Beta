@@ -1,6 +1,4 @@
 const { SlashCommandBuilder,EmbedBuilder } = require('discord.js');
-const axios = require('axios').default;
-//const { EmbedBuilder } = require('discord.js');
 const { info } = require('../../../modules/consoleMsg/console.js')
 const { getDateTime } = require('../../../modules/time/getTime.js')
 
@@ -26,8 +24,6 @@ module.exports = {
             'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Dice-5-b.svg/2048px-Dice-5-b.svg.png',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Dice-6-b.svg/768px-Dice-6-b.svg.png'
         ]
-        //let number = await loadNumber()
-        //console.log(global.number)  
 
         function response(time){
             return new EmbedBuilder()
@@ -40,7 +36,5 @@ module.exports = {
     
         await interaction.editReply({embeds: [await response(getDateTime())]})
 
-        //console.log(res)
-        //console.log(interaction.user)
     }
 }
